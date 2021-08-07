@@ -31,3 +31,5 @@ for i in range(1,20):
 
     print(i, '페이지 크롤링 완료...')
     time.sleep(1)
+
+    #하고 싶은 주석
