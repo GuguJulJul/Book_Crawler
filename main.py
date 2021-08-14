@@ -1,7 +1,8 @@
 import requests
 import time
 from bs4 import BeautifulSoup
-
+from DB.model import CrawlingBook
+from datetime import datetime
 
 url = "https://www.aladin.co.kr/shop/common/wbest.aspx?BestType=Bestseller&BranchType=1&CID=0&cnt=1000&SortOrder=1&page="
 for i in range(1,20):
@@ -25,10 +26,15 @@ for i in range(1,20):
             author = book.select('.ss_book_list')[0].select('ul li')[authorIndex].select('a')[0].text
         else:
             author = book.select('.ss_book_list')[0].select('ul li')[authorIndex].select('a')[0].text
-        print(imgUrl)
-        print(title)
-        print(author)
+        
+        now = datetime.now()
 
+        crawlingBook = CrawlingBook()
+        crawlingBook.title = title
+        crawlingBook.author_name = author
+        crawlingBook.img_url = imgUrl
+        crawlingBook.create_at = str(now)
+        
     print(i, '페이지 크롤링 완료...')
     time.sleep(1)
 
