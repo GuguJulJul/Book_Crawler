@@ -1,1 +1,1 @@
-from crawlingBookDAO import CrawlingBookDAO
+from .crawlingBookDAO import CrawlingBookDAO
