@@ -21,6 +21,7 @@ for i in range(1,20):
         imgUrl = book.select('table')[0].select('img')[0].get('src')
         title = book.select('.ss_book_list')[0].select('ul .bo3')[0].text
 
+  
         # 핑크색 글씨가 있을때는 2번째, 없을때는 1번째 li를 가져와야 함
         authorIndex = 1;
         if(book.select('.ss_book_list')[0].select('ul .ss_ht1')):
@@ -30,6 +31,13 @@ for i in range(1,20):
             author = book.select('.ss_book_list')[0].select('ul li')[authorIndex].select('a')[0].text
         
         now = datetime.now()
+
+        # 책 제목이 저장되어 있을경우 insert 하지 않음
+        bookList = crawlingBookDAO.selectByName(title)
+
+        if(len(bookList) == 0):
+            print(title, ' 이미 존재하는 책입니다.')
+            continue
 
         crawlingBook = CrawlingBook()
         crawlingBook.title = title
@@ -43,4 +51,6 @@ for i in range(1,20):
     print(i, '페이지 크롤링 완료...')
     time.sleep(1)
 
+
+    
     #하고 싶은 주석

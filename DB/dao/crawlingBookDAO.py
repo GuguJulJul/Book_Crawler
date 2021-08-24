@@ -7,4 +7,8 @@ class CrawlingBookDAO(MysqlController):
     self.cursor.execute(sql)
     self.connection.commit()
     
-  
+  def selectByName(self, bookTitle):
+    sql = 'SELECT * FROM crawling_book WHERE title LIKE \'' + bookTitle + '\''
+    self.cursor.execute(sql)
+    result = self.cursor.fetchall()
+    return result
